@@ -34,7 +34,15 @@ function log(text) {
 }
 // Listen to new 'pose' events
 poseNet.on('pose', (results) => {
-  poses = results;
-  httpGetAsync(`/send-data?test=${poses}`, log)
-  //console.log(results);
+  poses = results[0]
+  keypoints = poses["pose"]
+  console.log(keypoints)
+  var leftWrist = keypoints["leftWrist"]
+  console.log(leftWrist)
+  var leftX = leftWrist["x"]
+  var leftY = leftWrist["y"]
+  var rightWrist = keypoints["rightWrist"]
+  var rightX = rightWrist["x"]
+  var rightY = rightWrist["y"]
+  httpGetAsync(`/send-data?leftX=${leftX}&leftY=${leftY}&rightX=${rightX}&rightY=${rightY}`, log)
 });
