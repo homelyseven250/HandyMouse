@@ -18,7 +18,7 @@ def hello_world():
     lastLeftfile = open("lastLeft.txt", "r")
 
     # if movement is less that 20 pixels, don't move.
-    if x - int(lastLeftfile.read()) > 21:
+    if x - int(lastLeftfile.read()) > 10:
         #move mouse
         pyautogui.moveTo(x, y)
 
