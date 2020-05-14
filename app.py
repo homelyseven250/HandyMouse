@@ -1,5 +1,6 @@
 import pyautogui
 from flask import Flask, request, send_from_directory
+import pickle
 
 app = Flask(__name__, static_url_path='')
 
@@ -15,21 +16,31 @@ def hello_world():
     x = float(float(request.args["leftX"])*Xmultiplier)
     y = float(float(request.args["leftY"])*Ymultiplier)
 
+    rightY = float(float(request.args["rightY"])*Ymultiplier)
+
     lastLeftfile = open("lastLeft.txt", "r")
 
     # if movement is less that 20 pixels, don't move.
-    if x - int(lastLeftfile.read()) > 10:
+    #if float(request.args["leftX"]) - float(lastLeftfile.read()) > 5:
         #move mouse
-        pyautogui.moveTo(x, y)
+    pyautogui.moveTo(x, y)
 
+    #else:
+        #print("Jiggle")
+    if rightY > float(810):
+        isClicked = open("isClicked.txt", "rb")
+        if pickle.load(isClicked) != True:
+            pyautogui.leftClick()
+        isClicked.close()
     else:
-        print("Jiggle")
-
+        isClicked = open("isClicked.txt", "wb")
+        pickle.dump(False, isClicked)
+        isClicked.close()
     lastLeftfile.close()
 
     #save last left x location
     lastLeftfile = open("lastLeft.txt", "w")
-    lastLeftfile.write(str(x))
+    lastLeftfile.write(str(request.args["leftX"]))
     lastLeftfile.close()
 
     #########

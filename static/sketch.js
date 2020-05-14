@@ -16,7 +16,20 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 }
 
 // Create a new poseNet method
-poseNet = ml5.poseNet(video, modelLoaded);
+poseNet = ml5.poseNet(video, {
+  architecture: 'MobileNetV1',
+  imageScaleFactor: 0.3,
+  outputStride: 16,
+  flipHorizontal: true,
+  minConfidence: 0.5,
+  maxPoseDetections: 5,
+  scoreThreshold: 0.5,
+  nmsRadius: 20,
+  detectionType: 'multiple',
+  inputResolution: 513,
+  multiplier: 0.75,
+  quantBytes: 2,
+});
 
 // When the model is loaded
 function modelLoaded() {
