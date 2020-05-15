@@ -22,13 +22,12 @@ poseNet = ml5.poseNet(video, {
   outputStride: 16,
   flipHorizontal: true,
   minConfidence: 0.5,
-  maxPoseDetections: 5,
   scoreThreshold: 0.5,
   nmsRadius: 20,
-  detectionType: 'multiple',
+  detectionType: 'single',
   inputResolution: 513,
-  multiplier: 0.75,
-  quantBytes: 2,
+  multiplier: 1.0,
+  quantBytes: 4,
 });
 
 // When the model is loaded

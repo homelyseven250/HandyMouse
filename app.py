@@ -9,8 +9,8 @@ def hello_world():
     #get screen size, to expand x y values
     screenWidth, screenHeight = pyautogui.size()
     #find ratio
-    Xmultiplier = float(screenWidth/1280)
-    Ymultiplier = float(screenHeight/720)
+    Xmultiplier = float(screenWidth/640)
+    Ymultiplier = float(screenHeight/480)
     
     #convert to screen size
     x = float(float(request.args["leftX"])*Xmultiplier)
