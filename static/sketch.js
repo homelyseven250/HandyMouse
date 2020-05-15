@@ -17,17 +17,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 // Create a new poseNet method
 poseNet = ml5.poseNet(video, {
-  architecture: 'MobileNetV1',
-  imageScaleFactor: 0.3,
-  outputStride: 16,
-  flipHorizontal: true,
-  minConfidence: 0.5,
-  scoreThreshold: 0.5,
-  nmsRadius: 20,
-  detectionType: 'single',
-  inputResolution: 513,
-  multiplier: 1.0,
-  quantBytes: 4,
+  flipHorizontal: true
 });
 
 // When the model is loaded
@@ -40,6 +30,7 @@ function log(text) {
 }
 // Listen to new 'pose' events
 poseNet.on('pose', (results) => {
+  console.log(results)
   poses = results[0]
   keypoints = poses["pose"]
   console.log(keypoints)
