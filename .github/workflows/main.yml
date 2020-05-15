@@ -28,4 +28,6 @@ jobs:
     - name: Create requirements.txt
       run: pipreqs $GITHUB_WORKSPACE --force
     - name: Push to github
-      run: git push -u origin master
+      run: |
+            git add requirements.txt
+            git push -u origin master
